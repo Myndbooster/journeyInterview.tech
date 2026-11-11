@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="MIT Alumni Journeys — a candid editorial interview series about the decisions, turning points, and lessons behind remarkable alumni paths." />
+  <title>MIT Alumni Journeys | Read More</title>
+  <style>
+    :root {
+      --mit-red: #a31f34;
+      --mit-red-dark: #7d1728;
+      --ink: #171717;
+      --muted: #666666;
+      --line: #dedede;
+      --soft: #f5f5f3;
+      --soft-red: #f7eef0;
+      --white: #ffffff;
+      --max: 1180px;
+      --radius: 14px;
+      --shadow: 0 14px 40px rgba(0,0,0,.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--white);
+      font-family: Arial, Helvetica, system-ui, -apple-system, sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .topbar {
+      background: var(--ink);
+      color: #fff;
+      font-size: 14px;
+    }
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 9px 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+    .topbar a { color: #fff; text-decoration: none; opacity: .88; }
+    .topbar a:hover { opacity: 1; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,.97);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+    .nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      text-decoration: none;
+      min-width: 0;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      background: var(--mit-red);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      letter-spacing: -.06em;
+      font-size: 18px;
+    }
+    .brand-copy strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.15;
+      letter-spacing: .01em;
+    }
+    .brand-copy span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { color: var(--mit-red); }
+    .nav-cta {
+      background: var(--mit-red);
+      color: #fff !important;
+      padding: 10px 16px;
+      border-radius: 3px;
+    }
+    .nav-cta:hover { background: var(--mit-red-dark); }
+
+    .hero {
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+      position: relative;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.97) 54%, rgba(255,255,255,.5) 100%),
+        radial-gradient(circle at 78% 20%, rgba(163,31,52,.16), transparent 33%);
+    }
+    .hero:after {
+      content: "";
+      position: absolute;
+      right: -100px;
+      top: -90px;
+      width: 510px;
+      height: 510px;
+      border: 78px solid rgba(163,31,52,.07);
+      transform: rotate(18deg);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 84px 24px 76px;
+      display: grid;
+      grid-template-columns: minmax(0,1.18fr) minmax(330px,.82fr);
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .eyebrow {
+      color: var(--mit-red);
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(48px, 7vw, 88px);
+      line-height: .98;
+      letter-spacing: -.05em;
+      max-width: 830px;
+    }
+    .hero-lede {
+      font-size: clamp(20px, 2.5vw, 29px);
+      line-height: 1.3;
+      max-width: 760px;
+      margin: 26px 0 18px;
+      color: #333;
+    }
+    .hero-copy {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 31px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 3px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+      border: 1px solid var(--ink);
+    }
+    .btn-primary { background: var(--mit-red); border-color: var(--mit-red); color: #fff; }
+    .btn-primary:hover { background: var(--mit-red-dark); border-color: var(--mit-red-dark); }
+    .btn-secondary { background: #fff; }
+    .btn-secondary:hover { background: var(--soft); }
+
+    .hero-card {
+      background: var(--ink);
+      color: #fff;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .hero-card:before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 88px; height: 7px;
+      background: var(--mit-red);
+    }
+    .hero-card-label {
+      text-transform: uppercase;
+      color: #bdbdbd;
+      letter-spacing: .11em;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .hero-card blockquote {
+      margin: 18px 0 23px;
+      font-size: 28px;
+      line-height: 1.22;
+      letter-spacing: -.02em;
+      font-weight: 700;
+    }
+    .hero-card .meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid #3b3b3b;
+    }
+    .hero-card .meta div { padding: 16px 0 0; }
+    .hero-card .meta div + div { border-left: 1px solid #3b3b3b; padding-left: 18px; }
+    .hero-card .meta b { display: block; font-size: 18px; }
+    .hero-card .meta span { color: #aaa; font-size: 12px; }
+
+    .section { padding: 76px 24px; }
+    .section.soft { background: var(--soft); }
+    .section.dark { background: var(--ink); color: #fff; }
+    .wrap { max-width: var(--max); margin: 0 auto; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 220px minmax(0,1fr);
+      gap: 36px;
+      align-items: start;
+      margin-bottom: 42px;
+    }
+    .section-kicker {
+      color: var(--mit-red);
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      padding-top: 10px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(33px, 4.6vw, 56px);
+      line-height: 1.02;
+      letter-spacing: -.04em;
+    }
+    .section-head p {
+      grid-column: 2;
+      max-width: 760px;
+      color: var(--muted);
+      margin: -20px 0 0;
+      font-size: 18px;
+    }
+    .dark .section-head p { color: #bcbcbc; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .fact {
+      padding: 30px 24px 27px;
+      min-height: 168px;
+    }
+    .fact + .fact { border-left: 1px solid var(--line); }
+    .fact-num {
+      font-size: 40px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      color: var(--mit-red);
+      margin-bottom: 16px;
+    }
+    .fact h3 { margin: 0 0 7px; font-size: 18px; }
+    .fact p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      padding: 34px;
+      background: #fff;
+      border-radius: var(--radius);
+    }
+    .panel h3 {
+      margin: 0 0 18px;
+      font-size: 27px;
+      letter-spacing: -.02em;
+    }
+    .panel p { color: var(--muted); }
+    .checklist { margin: 0; padding: 0; list-style: none; }
+    .checklist li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      padding: 13px 0;
+      border-top: 1px solid #ececec;
+    }
+    .checklist li:first-child { border-top: 0; }
+    .icon {
+      width: 24px; height: 24px;
+      border: 1.5px solid var(--mit-red);
+      color: var(--mit-red);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 12px; font-weight: 900;
+      margin-top: 1px;
+    }
+    .checklist b { display: block; margin-bottom: 2px; }
+    .checklist span { color: var(--muted); font-size: 14px; }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid #3a3a3a;
+      border-left: 1px solid #3a3a3a;
+    }
+    .story-card {
+      min-height: 235px;
+      padding: 30px;
+      border-right: 1px solid #3a3a3a;
+      border-bottom: 1px solid #3a3a3a;
+      position: relative;
+    }
+    .story-index {
+      color: #777;
+      font-size: 12px;
+      letter-spacing: .1em;
+      margin-bottom: 36px;
+    }
+    .story-card h3 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      line-height: 1.08;
+      letter-spacing: -.02em;
+    }
+    .story-card p { color: #b7b7b7; margin: 0; font-size: 14px; }
+    .story-card:after {
+      content: "";
+      position: absolute;
+      left: 30px;
+      bottom: 22px;
+      width: 38px;
+      height: 3px;
+      background: var(--mit-red);
+    }
+
+    .audience {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .audience h2 {
+      margin: 0;
+      font-size: clamp(38px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+    .audience-intro { color: var(--muted); font-size: 18px; margin: 22px 0 0; }
+    .audience-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+    }
+    .audience-item {
+      padding: 18px 14px 18px 0;
+      border-bottom: 1px solid var(--line);
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .audience-item:nth-child(even) { padding-left: 18px; border-left: 1px solid var(--line); }
+    .audience-item span { color: var(--mit-red); margin-right: 8px; }
+
+    .feature-preview {
+      display: grid;
+      grid-template-columns: 1fr .95fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+    .browser {
+      background: #fff;
+      color: var(--ink);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,.24);
+      border: 1px solid #2e2e2e;
+    }
+    .browser-top {
+      height: 42px;
+      background: #ececec;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 14px;
+    }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #bbb; }
+    .browser-body { padding: 28px; }
+    .mock-kicker { color: var(--mit-red); font-weight: 800; font-size: 11px; letter-spacing: .11em; }
+    .mock-title { font-size: 38px; line-height: 1; letter-spacing: -.04em; margin: 10px 0 12px; }
+    .mock-copy { color: #666; max-width: 510px; }
+    .mock-choice {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid #ddd;
+    }
+    .choice { padding: 20px; }
+    .choice + .choice { border-left: 1px solid #ddd; background: var(--soft-red); }
+    .choice b { display:block; margin-bottom: 6px; }
+    .choice small { color: #777; }
+    .mock-quote {
+      margin-top: 22px;
+      padding: 22px 0 0;
+      border-top: 4px solid var(--mit-red);
+      font-size: 21px;
+      font-weight: 700;
+    }
+    .feature-copy {
+      border: 1px solid #343434;
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .feature-copy h3 { font-size: 34px; line-height: 1.05; margin: 0 0 16px; letter-spacing: -.03em; }
+    .feature-copy p { color: #bbb; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .tag { border: 1px solid #555; color: #ddd; padding: 8px 10px; font-size: 12px; }
+
+    .faq { max-width: 900px; margin-left: auto; }
+    details { border-top: 1px solid var(--line); }
+    details:last-child { border-bottom: 1px solid var(--line); }
+    summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 20px;
+      padding: 22px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    summary::-webkit-details-marker { display:none; }
+    summary:after { content: "+"; color: var(--mit-red); font-size: 26px; line-height: 1; }
+    details[open] summary:after { content: "–"; }
+    details p { margin: -5px 0 24px; color: var(--muted); max-width: 760px; }
+
+    .cta-section {
+      background: var(--mit-red);
+      color: #fff;
+      padding: 62px 24px;
+    }
+    .cta-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+    }
+    .cta-inner h2 {
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: 1;
+      margin: 0 0 12px;
+      letter-spacing: -.04em;
+    }
+    .cta-inner p { margin: 0; color: rgba(255,255,255,.84); font-size: 17px; }
+    .cta-inner .btn { background: #fff; border-color: #fff; color: var(--mit-red); min-width: 240px; }
+
+    footer { background: #111; color: #fff; }
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 36px 24px 48px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 30px;
+    }
+    .footer-title { font-weight: 800; margin-bottom: 8px; }
+    .footer-copy { color: #999; max-width: 560px; font-size: 13px; }
+    .footer-links { display: flex; gap: 18px; justify-content: flex-end; align-items: start; font-size: 13px; }
+    .footer-links a { color: #ddd; text-decoration: none; }
+    .footer-links a:hover { color: #fff; }
+
+    @media (max-width: 900px) {
+      .nav-links a:not(.nav-cta) { display:none; }
+      .hero-inner, .audience, .feature-preview { grid-template-columns: 1fr; }
+      .hero-inner { gap: 34px; padding-top: 58px; }
+      .facts { grid-template-columns: 1fr 1fr; }
+      .fact:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
+      .fact:nth-child(4) { border-top: 1px solid var(--line); }
+      .story-grid { grid-template-columns: 1fr 1fr; }
+      .section-head { grid-template-columns: 1fr; gap: 12px; }
+      .section-head p { grid-column: 1; margin: 0; }
+      .cta-inner, .footer-inner { grid-template-columns: 1fr; }
+      .footer-links { justify-content: flex-start; }
+    }
+
+    @media (max-width: 620px) {
+      .topbar-inner { display:none; }
+      .nav { padding: 12px 16px; }
+      .brand-copy span { display:none; }
+      .nav-cta { padding: 9px 11px; font-size: 12px; }
+      .hero-inner, .section { padding-left: 18px; padding-right: 18px; }
+      .hero-inner { padding-top: 48px; padding-bottom: 52px; }
+      .hero-card { padding: 24px; }
+      .split, .story-grid, .audience-list, .facts { grid-template-columns: 1fr; }
+      .fact + .fact, .fact:nth-child(3), .fact:nth-child(4) { border-left: 0; border-top: 1px solid var(--line); }
+      .story-card { min-height: 190px; }
+      .audience-item:nth-child(even) { padding-left: 0; border-left: 0; }
+      .mock-choice { grid-template-columns: 1fr; }
+      .choice + .choice { border-left: 0; border-top: 1px solid #ddd; }
+      .cta-inner .btn { width: 100%; min-width: 0; }
+      .footer-links { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span>MIT Club of Northern California</span>
+      <a href="https://www.mitcnc.org/" target="_blank" rel="noopener">Visit MITCNC.org ↗</a>
+    </div>
+  </div>
+
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top">
+        <div class="brand-mark" aria-hidden="true">MIT</div>
+        <div class="brand-copy">
+          <strong>Alumni Journeys</strong>
+          <span>Stories behind consequential decisions</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#conversation">The conversation</a>
+        <a href="#feature">The feature</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-cta" href="#interested">I’m interested</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">MIT alumni interview series</div>
+          <h1>The decisions behind remarkable paths.</h1>
+          <p class="hero-lede">A candid editorial series about the moments when the answer was not obvious.</p>
+          <p class="hero-copy">We talk with MIT alumni about one defining fork in the road — what they knew, what they got wrong, what the choice cost, and how it changed what came next.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#conversation">How it works →</a>
+            <a class="btn btn-secondary" href="#feature">See the final format</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Series premise">
+          <div class="hero-card-label">The question at the center</div>
+          <blockquote>“What decision changed your path — before you knew how it would end?”</blockquote>
+          <div class="meta">
+            <div><b>25–30 min</b><span>Zoom conversation</span></div>
+            <div><b>Minimal prep</b><span>We guide the interview</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">Why this series</div>
+          <h2>Not another résumé interview.</h2>
+          <p>Accomplishments are visible. The decisions behind them usually are not. This series focuses on the uncertainty, tradeoffs, failed assumptions, and changes of mind that shaped the journey.</p>
+        </div>
+
+        <div class="facts" aria-label="Interview format facts">
+          <div class="fact">
+            <div class="fact-num">01</div>
+            <h3>One defining moment</h3>
+            <p>We anchor the conversation around a consequential choice or turning point.</p>
+          </div>
+          <div class="fact">
+            <div class="fact-num">25–30</div>
+            <h3>Minutes on Zoom</h3>
+            <p>One-on-one, conversational, and designed to respect your time.</p>
+          </div>
+          <div class="fact">
+            <div class="fact-num">0</div>
+            <h3>Slides required</h3>
+            <p>No presentation. No prepared speech. Minimal advance work.</p>
+          </div>
+          <div class="fact">
+            <div class="fact-num">1→many</div>
+            <h3>Editorial outputs</h3>
+            <p>A website feature plus selected short clips and quote moments.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="conversation">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">The conversation</div>
+          <h2>We follow the interesting answer.</h2>
+          <p>This is not a fixed corporate Q&amp;A. We come prepared, start with the decision, and stay with the moments that reveal how you actually thought when the outcome was still uncertain.</p>
+        </div>
+
+        <div class="split">
+          <div class="panel">
+            <h3>What’s involved</h3>
+            <ul class="checklist">
+              <li><span class="icon">✓</span><div><b>25–30 minute conversation</b><span>Short enough to fit a busy schedule, long enough to get past surface answers.</span></div></li>
+              <li><span class="icon">✓</span><div><b>One-on-one on Zoom</b><span>Remote, relaxed, and easy to schedule.</span></div></li>
+              <li><span class="icon">✓</span><div><b>Minimal preparation</b><span>We research the journey and guide the conversation.</span></div></li>
+              <li><span class="icon">✓</span><div><b>Editorially shaped</b><span>The strongest moments are developed into a clear, compelling feature.</span></div></li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>What we are looking for</h3>
+            <p>Not a perfect success story. A useful one.</p>
+            <ul class="checklist">
+              <li><span class="icon">→</span><div><b>A decision without a guaranteed answer</b><span>The fork matters because both paths were plausible.</span></div></li>
+              <li><span class="icon">→</span><div><b>A belief that changed</b><span>What experience forced you to rethink or unlearn?</span></div></li>
+              <li><span class="icon">→</span><div><b>A real tradeoff</b><span>What did the choice give you — and what did it cost?</span></div></li>
+              <li><span class="icon">→</span><div><b>An unfinished question</b><span>What are you still trying to figure out today?</span></div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">The story arc</div>
+          <h2>Six lenses. One consequential choice.</h2>
+          <p>The structure is designed to reveal the thinking behind the outcome — not simply retell the outcome itself.</p>
+        </div>
+
+        <div class="story-grid">
+          <article class="story-card"><div class="story-index">01 / THE FORK</div><h3>What were the two paths?</h3><p>We reconstruct the actual decision rather than narrating it with hindsight.</p></article>
+          <article class="story-card"><div class="story-index">02 / WHAT YOU KNEW</div><h3>What information did you have then?</h3><p>What was clear, what was missing, and who influenced your thinking?</p></article>
+          <article class="story-card"><div class="story-index">03 / THE UPDATE</div><h3>What did you believe that turned out to be wrong?</h3><p>We look for the assumption that experience forced you to revise.</p></article>
+          <article class="story-card"><div class="story-index">04 / THE PRICE</div><h3>What did choosing this require you to give up?</h3><p>Time, certainty, status, money, relationships, or another opportunity.</p></article>
+          <article class="story-card"><div class="story-index">05 / THE ROAD NOT TAKEN</div><h3>Where might the other path have led?</h3><p>Success is not the only lens. Tradeoffs make the story more honest.</p></article>
+          <article class="story-card"><div class="story-index">06 / THE HAND-OFF</div><h3>What question would you give the next alum?</h3><p>Not a slogan — a useful question for someone facing a similar crossroads.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap audience">
+        <div>
+          <div class="eyebrow">Who it’s for</div>
+          <h2>For alumni asking, “What comes next?”</h2>
+          <p class="audience-intro">We think about the audience by the decisions they are facing, not only by their job titles.</p>
+        </div>
+        <div class="audience-list">
+          <div class="audience-item"><span>→</span> Building something new</div>
+          <div class="audience-item"><span>→</span> Leaving something successful</div>
+          <div class="audience-item"><span>→</span> Commercializing research</div>
+          <div class="audience-item"><span>→</span> Moving into leadership</div>
+          <div class="audience-item"><span>→</span> Changing industries</div>
+          <div class="audience-item"><span>→</span> Starting again after a setback</div>
+          <div class="audience-item"><span>→</span> Choosing between opportunity and purpose</div>
+          <div class="audience-item"><span>→</span> Questioning a long-held assumption</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="feature">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">The final feature</div>
+          <h2>Built like an editorial case study, not a bio page.</h2>
+          <p>The finished story can combine selected interview excerpts, short video moments, photographs, defining quotes, and a visual reconstruction of the decision.</p>
+        </div>
+
+        <div class="feature-preview">
+          <div class="browser" aria-label="Example alumni feature mockup">
+            <div class="browser-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="browser-body">
+              <div class="mock-kicker">MIT ALUMNI JOURNEYS / THE FORK</div>
+              <div class="mock-title">A safe path.<br/>Or the uncertain one.</div>
+              <p class="mock-copy">In one week, an alum had to choose between a prestigious role and an idea with no customers. Here is what the decision looked like before the outcome was known.</p>
+              <div class="mock-choice">
+                <div class="choice"><b>PATH A</b><small>Prestige · stability · clear trajectory</small></div>
+                <div class="choice"><b>PATH B</b><small>Uncertainty · ownership · unproven idea</small></div>
+              </div>
+              <div class="mock-quote">“I wasn’t choosing between right and wrong. I was choosing between two futures I could live with.”</div>
+            </div>
+          </div>
+
+          <div class="feature-copy">
+            <div>
+              <h3>The website experience can unfold chapter by chapter.</h3>
+              <p>The decision leads. Credentials provide context, but they do not become the story. The audience gets the tension first — then the thinking behind it.</p>
+            </div>
+            <div class="tags" aria-label="Feature sections">
+              <span class="tag">The Fork</span>
+              <span class="tag">What You Knew</span>
+              <span class="tag">What Changed Your Mind</span>
+              <span class="tag">The Price</span>
+              <span class="tag">The Road Not Taken</span>
+              <span class="tag">What I’m Still Figuring Out</span>
+              <span class="tag">For the Next Alum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">FAQ</div>
+          <h2>What to expect.</h2>
+        </div>
+        <div class="faq">
+          <details open>
+            <summary>How much time does it take?</summary>
+            <p>Plan for approximately 25–30 minutes for the Zoom interview. There is minimal preparation required beforehand.</p>
+          </details>
+          <details>
+            <summary>Do I need to prepare answers or slides?</summary>
+            <p>No. We will come prepared with context and guide the conversation. If helpful, you may optionally share a headshot, short bio, or photographs connected to a defining moment.</p>
+          </details>
+          <details>
+            <summary>Is this a company or promotional interview?</summary>
+            <p>No. The focus is the person, the decision, and the thinking behind the journey. Company context may appear where relevant, but the conversation is not designed as a corporate pitch.</p>
+          </details>
+          <details>
+            <summary>How will the interview be used?</summary>
+            <p>The conversation may be developed into an editorial feature for the alumni website, with selected short video clips, quotes, or supporting story elements where appropriate.</p>
+          </details>
+          <details>
+            <summary>What happens next if I’m interested?</summary>
+            <p>Reply to your invitation email and we will coordinate a convenient time for a 25–30 minute Zoom conversation.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="interested">
+      <div class="cta-inner">
+        <div>
+          <h2>One decision can help another alum make theirs.</h2>
+          <p>Interested in participating? Reply to your invitation email and we’ll coordinate a convenient Zoom time.</p>
+        </div>
+        <a class="btn" href="mailto:?subject=MIT%20Alumni%20Journeys%20%E2%80%94%20Interested">Reply / express interest →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-title">MIT Alumni Journeys</div>
+        <div class="footer-copy">A concept page for an MIT alumni editorial interview series. Final publishing, branding, permissions, and guest-review practices should follow the applicable MITCNC / MIT Alumni Association guidelines.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#top">Back to top</a>
+        <a href="https://www.mitcnc.org/" target="_blank" rel="noopener">MITCNC.org ↗</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
